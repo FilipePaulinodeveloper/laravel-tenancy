@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Produtos') }}
+            {{ __('Opções de Entrega') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-end mb-8">
-                <a href="{{route('admin.products.create')}}" class="px-6 py-2 bg-green-600 shadow text-white font-bold rounded">Criar Produto</a>
+                <a href="{{route('admin.shippings.create')}}" class="px-6 py-2 bg-green-600 shadow text-white font-bold rounded">Criar Entrega</a>
             </div>
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -21,10 +21,7 @@
                                         #
                                     </th>
                                     <th scope="col" class="font-semi px-6 py-4 text-center text-xs text-gray-500 uppercase tracking-wider">
-                                        Name
-                                    </th>
-                                    <th scope="col" class="px-6 py-4 text-center text-xs font-semi text-gray-500 uppercase tracking-wider">
-                                        Preço
+                                        Nome Entrega
                                     </th>
                                     <th scope="col" class="px-6 py-4 text-center text-xs font-semi text-gray-500 uppercase tracking-wider">
                                         Criado Em
@@ -35,26 +32,23 @@
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                @forelse($products as $product)
+                                @forelse($shippings as $shipping)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                            {{$product->id}}
+                                            {{$shipping->id}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                            {{$product->name}}
+                                            {{$shipping->name}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                            R$ {{number_format($product->price, 2, ',', '.')}}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                            {{$product->created_at->format('d/m/Y H:i:s')}}
+                                            {{$shipping->created_at->format('d/m/Y H:i:s')}}
                                         </td>
                                         <td class="w-48 px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500 flex justify-between">
-                                            <a href="{{route('admin.products.edit', $product)}}" class="text-blue-500 hover:text-blue-200 font-bold hover:underline
+                                            <a href="{{route('admin.shippings.edit', $shipping)}}" class="text-blue-500 hover:text-blue-200 font-bold hover:underline
                                                 transition-all ease-in-out duration-200">EDITAR</a>
 
 
-                                            <form action="{{route('admin.products.destroy', $product)}}" class="destroyButton" method="POST">
+                                            <form action="{{route('admin.shippings.destroy', $shipping)}}" class="destroyButton" method="POST">
                                                 @csrf
                                                 @method("DELETE")
                                                 <button
@@ -65,14 +59,11 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500"><h3>Nenhum produto encontrado em sua loja</h3></td>
+                                        <td colspan="5" class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500"><h3>Nenhuma opção de frete encontrado em sua loja</h3></td>
                                     </tr>
                                 @endforelse
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="mt-8">
-                            {{$products->links()}}
                         </div>
                     </div>
                 </div>

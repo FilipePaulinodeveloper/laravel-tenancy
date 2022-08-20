@@ -77,7 +77,7 @@ class ProductController extends Controller
         $categories = $category->all('id', 'name');
         $product = $this->product->findOrFail($id);  
         
-        return view('admin.products.create', compact('product','categories'));
+        return view('admin.products.edit', compact('product','categories'));
     }
 
     /**
@@ -96,7 +96,7 @@ class ProductController extends Controller
 
         session()->flash('message', ['type' => 'success', 'body' => 'Sucesso ao atualizar produto']);
 
-        return redirect()->route('products.edit', $product);
+        return redirect()->route('admin.products.edit', $product);
     }
 
     /**

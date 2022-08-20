@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class TenantScope implements Scope
 {
     public function apply(Builder $builder,Model $model)
-    {
+    {   
+       if(session()->has('tenant'))
         $builder->where('tenant_id', session()->get('tenant'));
     }
 }
